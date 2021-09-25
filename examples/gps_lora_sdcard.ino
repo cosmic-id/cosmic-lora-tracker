@@ -6,18 +6,18 @@
 #include <SD.h>
 File myFile;
 
-#define Interval 15000
-//#define Interval 5000
-#define GPS_LED PB4
-#define LED PB5
-#define GPSEN PA2
-#define BUTTON PB15
-#define GPSRST PB1
+#define Interval            15000
+#define GPS_LED             PB4
+#define LED                 PB5
+#define GPSEN               PA2
+#define BUTTON              PB15
+#define GPSRST              PB1
 
-#define GPSTX PB6 //pin number for GPS TX output - data from Arduino into GPS
-#define GPSRX PB7 //pin number for GPS RX input - to Arduino from GPS
-#define GPSBaud 9600 //GPS Baud rate
+#define GPSTX               PB6 //pin number for GPS TX output - data from Arduino into GPS
+#define GPSRX               PB7 //pin number for GPS RX input - to Arduino from GPS
+#define GPSBaud             9600 //GPS Baud rate
 #define Serial_Monitor_Baud 115200   //this is baud rate used for the Arduino IDE Serial Monitor
+
 SoftwareSerial GPSserial(GPSRX, GPSTX);
 HardwareSerial SerialMon(PA10, PA9);
 
@@ -36,8 +36,8 @@ const char *appSKey = "000000000000000002e21425cc8ccfa2";
 char myStr[50];
 
 const sRFM_pins RFM_pins = {
-  .CS = PA4,
-  .RST = PB0,
+  .CS   = PA4,
+  .RST  = PB0,
   .DIO0 = PA3,
   .DIO1 = PA0,
 };
@@ -124,14 +124,14 @@ void loop() {
             myFile = SD.open("LOCATION.txt", FILE_WRITE);
 
             if (myFile) {
-              SerialMon.println("    [SD] Writing GPS Location to LOCATION.txt");
-              myFile.print(dataDateTime);myFile.print(" ");
-              myFile.println(dataSend);
-              myFile.close();
-              SerialMon.println("    [SD] Writing GPS Location done!");
+                SerialMon.println("    [SD] Writing GPS Location to LOCATION.txt");
+                myFile.print(dataDateTime);myFile.print(" ");
+                myFile.println(dataSend);
+                myFile.close();
+                SerialMon.println("    [SD] Writing GPS Location done!");
             } else {
-              // if the file didn't open, print an error:
-              SerialMon.println("    [SD] Error Opening LOCATION.txt");
+                // if the file didn't open, print an error:
+                SerialMon.println("    [SD] Error Opening LOCATION.txt");
             }
             digitalWrite(LED, LOW);
             delay(500);
